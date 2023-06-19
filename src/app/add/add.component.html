@@ -1,0 +1,74 @@
+<div class="px-4 py-8 md:px-6 lg:px-8">
+   <div class="flex flex-wrap" *ngIf="!bloggerReady">
+      <!--           LEFT         -->
+      <div
+         class="w-full lg:w-6 p-4 lg:p-7"
+         style="background-color: rgba(255, 255, 255, 0.7)"
+      >
+         <app-left-text></app-left-text>
+      </div>
+
+      <!--           RIGHT         -->
+      <div class="w-full lg:w-6 p-4 lg:p-7 surface-card">
+         <div class="text-900 text-2xl font-medium mb-6">Blogger</div>
+
+         <!-- (ngSubmit)="polizaForm.valid && cotizarPoliza()" -->
+         <form
+            [formGroup]="bloggerForm"
+            (ngSubmit)="addFriend()"
+            autocomplete="off"
+         >
+            <!--              NOMBRE              -->
+            <app-text-input
+               [formControl]="$any(bloggerForm.controls['name'])"
+               [label]="'Nombre'"
+            ></app-text-input>
+
+            <!--              WEBSITE              -->
+            <app-text-input
+               [formControl]="$any(bloggerForm.controls['website'])"
+               [label]="'Website'"
+            ></app-text-input>
+
+            <!--              FOTO              -->
+            <app-text-input
+               [formControl]="$any(bloggerForm.controls['picture_url'])"
+               [label]="'Foto Url (opcional)'"
+            ></app-text-input>
+
+            <!--              EMAIL              -->
+            <app-text-input
+               [formControl]="$any(bloggerForm.controls['email'])"
+               [label]="'Email'"
+            ></app-text-input>
+
+            <button
+               pButton
+               label="Amigos"
+               icon="pi pi-plus"
+               class="w-full"
+               type="submit"
+               [disabled]="bloggerForm.invalid"
+            ></button>
+         </form>
+      </div>
+   </div>
+
+   <!--           AMIGOS         -->
+   <div class="w-full" style="background-color: rgba(234, 236, 253, 0.7)">
+      <!-- <app-coberturas
+         [vehiculo]="polizaForm.value['vehiculo']"
+         [catalogos]="coberturasCatalogoList"
+         [polizaSelected]="polizaSelected"
+         [poliza]="polizaForm.value"
+         (rejectPoliza)="rejectPoliza()"
+      ></app-coberturas> -->
+
+      <app-amigos
+         [bloggers]="bloggers"
+         [bloggerReady]="bloggerReady"
+         [bloggerForm]="bloggerForm.value"
+         (rejectFriends)="rejectAddFriend()"
+      ></app-amigos>
+   </div>
+</div>
